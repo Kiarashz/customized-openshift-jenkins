@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: custom-jenkins-build
+spec:
+  source:                       
+    git:
+      uri: https://github.com/Kiarashz/customized-openshift-jenkins.git
+    type: Git
+  strategy:                     
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: jenkins:latest
+    type: Source
+  output:                       
+    to:
+      kind: DockerImage
+      name: docker.io/kiarashz/openshift-jenkins:latest
+    pushSecret: 
+      name: dtr-hub
